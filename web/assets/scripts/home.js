@@ -1,5 +1,5 @@
-var auth = WeDeploy.auth('https://auth-javaone.liferay.com');
-var data = WeDeploy.data('https://db-javaone.liferay.com');
+var auth = WeDeploy.auth('https://auth-devoxx.wedeploy.io');
+var data = WeDeploy.data('https://db-devoxx.wedeploy.io');
 
 // Check Authentication
 
@@ -49,8 +49,6 @@ function createUser(form) {
 			id: window.md5(form.email.value),
 			name: form.name.value,
 			email: form.email.value,
-			company: form.company.value,
-			jobtitle: form.jobtitle.value,
 			password: form.password.value
 		});
 }
