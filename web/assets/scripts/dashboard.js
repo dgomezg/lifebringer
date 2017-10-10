@@ -12,7 +12,7 @@ var logout = document.querySelector('.profile-logout');
 
 logout.addEventListener('click', function() {
 	WeDeploy
-		.auth('auth-devoxx.wedeploy.io')
+		.auth('auth-devoxx.liferay.com')
 		.signOut()
 		.then(function() {
 			localStorage.clear();
@@ -30,7 +30,7 @@ logout.addEventListener('click', function() {
 var table = document.querySelector('table tbody');
 
 WeDeploy
-	.data('db-devoxx.wedeploy.io')
+	.data('db-devoxx.liferay.com')
 	.orderBy('maxScore', 'desc')
 	.limit(500)
 	.get('players')

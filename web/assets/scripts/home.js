@@ -1,5 +1,5 @@
-var auth = WeDeploy.auth('https://auth-devoxx.wedeploy.io');
-var data = WeDeploy.data('https://db-devoxx.wedeploy.io');
+var auth = WeDeploy.auth('https://auth-devoxx.liferay.com');
+var data = WeDeploy.data('https://db-devoxx.liferay.com');
 
 // Check Authentication
 
