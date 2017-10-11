@@ -66,8 +66,15 @@ function appendCurrentUser(user) {
 	var profileName = document.querySelector('.profile-name');
 	var profilePosition = document.querySelector('.profile-position');
 	var profileScore = document.querySelector('.profile-score');
+	var profileMessage = document.querySelector('.profile-message');
 
 	profileName.innerText = user.name;
 	profilePosition.innerText = user.position;
 	profileScore.innerText = user.maxScore;
+
+	if (user.position === 1) {
+		profileMessage.innerText = 'Congratulations, you beat the highscore!';
+	} else {
+		profileMessage.innerText = 'Try again to beat the highscore!';
+	}
 }

@@ -24,8 +24,13 @@
 }
 
 .profile-position,
-.profile-score {
+.profile-score,
+.profile-message {
 	color: #00d46a;
+}
+
+.profile-message {
+	margin: 20px 0;
 }
 
 .profile-play {
@@ -39,7 +44,7 @@
 	font-weight: 600;
 	line-height: 58px;
 	outline: none;
-	margin: 20px 0 0;
+	margin: 0;
 	width: 100%;
 	text-decoration: none;
 }
