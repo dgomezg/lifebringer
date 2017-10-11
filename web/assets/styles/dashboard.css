@@ -1,3 +1,8 @@
+.logo {
+	margin: 20px 0 0;
+	width: 100%;
+}
+
 /* User Profile */
 
 .profile {
@@ -10,7 +15,7 @@
 .profile-name {
 	font-weight: 300;
 	color: rgba(255, 255, 255, 0.9);
-	margin: 40px 0 20px;
+	margin: 0 0 20px;
 }
 
 .profile-ranking {
