@@ -2,9 +2,9 @@
 
 var currentUser = WeDeploy.auth().currentUser;
 
-if (!currentUser) {
-	document.location.href = '/';
-}
+// if (!currentUser) {
+// 	document.location.href = '/';
+// }
 
 // Logout
 
@@ -46,7 +46,6 @@ function createLeaderboard(players) {
 
 	for (var i = 0; i < players.length; i++) {
 		players[i].position = i + 1;
-		players[i].photoUrl = players[i].photoUrl || '/assets/images/avatar.jpg';
 		players[i].name = players[i].name || players[i].email;
 
 		if (players[i].id === window.md5(currentUser.email)) {
@@ -64,12 +63,10 @@ function createLeaderboard(players) {
 }
 
 function appendCurrentUser(user) {
-	var profileAvatar = document.querySelector('.profile-avatar');
 	var profileName = document.querySelector('.profile-name');
 	var profilePosition = document.querySelector('.profile-position');
 	var profileScore = document.querySelector('.profile-score');
 
-	profileAvatar.setAttribute('src', user.photoUrl);
 	profileName.innerText = user.name;
 	profilePosition.innerText = user.position;
 	profileScore.innerText = user.maxScore;

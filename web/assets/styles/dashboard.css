@@ -7,18 +7,10 @@
 	padding: 20px 0 40px;
 }
 
-.profile-avatar {
-	width: 128px;
-	height: 128px;
-	border-radius: 50%;
-	margin: 0 0 20px;
-	background: white;
-}
-
 .profile-name {
 	font-weight: 300;
 	color: rgba(255, 255, 255, 0.9);
-	margin: 0 0 20px;
+	margin: 40px 0 20px;
 }
 
 .profile-ranking {
