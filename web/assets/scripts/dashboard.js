@@ -2,9 +2,9 @@
 
 var currentUser = WeDeploy.auth().currentUser;
 
-// if (!currentUser) {
-// 	document.location.href = '/';
-// }
+if (!currentUser) {
+	document.location.href = '/';
+}
 
 // Logout
 
