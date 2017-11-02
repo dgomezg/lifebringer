@@ -1,6 +1,6 @@
 // Profile
 
-var currentUser = WeDeploy.auth().currentUser;
+var currentUser = WeDeploy.auth('auth-devoxx.liferay.com').currentUser;
 
 if (!currentUser) {
 	document.location.href = '/';
