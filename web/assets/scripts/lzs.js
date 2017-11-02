@@ -78,39 +78,74 @@
                 .where('id', id)
                 .get('players')
                 .then(function(result) {
-                    var player = {};
 
-                    if (result.length > 0) {
-                        player = result[0];
+                    console.log(result);
+
+                    if (result.length == 0) {
+                        WeDeploy
+                            .data('db-devoxx.liferay.com')
+                            .create('players', {
+                                "name": currentUser.name,
+                                "count": 1,
+                                "games": [
+                                    {
+                                        gameDate: ((new Date()).toJSON()),
+                                        score: score,
+                                        redZombiesKilled: redZombiesKilledTotal,
+                                        greenZombiesKilled: greenZombiesKilledTotal,
+                                        fired: firedTotal,
+                                        missed: missedTotal,
+                                        level: level
+                                    }
+                                ],
+                                "id": id,
+                                "maxScore": score
+                            }
+                            ).then(function() {
+                                setTimeout(redirectToGameOverPage, 2000);
+                            })
+                            .catch(function(createError) {
+                                console.log(createError);
+                                alert('Something wrong happened, try later.');
+                            });
+
+                    } else {
+                        var player = {};
+
+                        player = result[0]
+
+                        player.count++;
+
+                        if (score > player.maxScore) {
+                            player.maxScore = score;
+                        }
+
+                        player.games[player.games.length] = {
+                            gameDate: ((new Date()).toJSON()),
+                            score: score,
+                            redZombiesKilled: redZombiesKilledTotal,
+                            greenZombiesKilled: greenZombiesKilledTotal,
+                            fired: firedTotal,
+                            missed: missedTotal,
+                            level: level
+                        };
+
+                        WeDeploy
+                            .data('db-devoxx.liferay.com')
+                            .update('players/' + id, player)
+                            .then(function() {
+                                setTimeout(redirectToGameOverPage, 2000);
+                            })
+                            .catch(function(updateError) {
+                                console.log(updateError);
+                                alert('Something wrong happened, try later.');
+                            });
                     }
 
-                    player.count++;
-
-                    if (score > player.maxScore) {
-                        player.maxScore = score;
-                    }
-
-                    player.games[player.games.length] = {
-                        gameDate: ((new Date()).toJSON()),
-                        score: score,
-                        redZombiesKilled: redZombiesKilledTotal,
-                        greenZombiesKilled: greenZombiesKilledTotal,
-                        fired: firedTotal,
-                        missed: missedTotal,
-                        level: level
-                    };
-
-                    WeDeploy
-                        .data('db-devoxx.liferay.com')
-                        .update('players/' + id, player)
-                        .then(function() {
-                            setTimeout(redirectToGameOverPage, 2000);
-                        })
-                        .catch(function() {
-                            alert('Something wrong happened, try later.');
-                        });
                 })
-                .catch(function() {
+
+                .catch(function(getError) {
+                    console.log(getError);
                     alert('Something wrong happened, try later.');
                 });
         }
