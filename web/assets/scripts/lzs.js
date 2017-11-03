@@ -69,45 +69,27 @@
 
         var currentUser = config.currentUser;
         var WeDeploy = config.weDeploy;
+        var gameStats = {
+                gameDate: ((new Date()).toJSON()),
+                score: score,
+                redZombiesKilled: redZombiesKilledTotal,
+                greenZombiesKilled: greenZombiesKilledTotal,
+                fired: firedTotal,
+                missed: missedTotal,
+                level: level
+            }
+        var id = window.md5(currentUser.email);
 
         var sendScoreToServer = function() {
-            var id = window.md5(currentUser.email);
-
             WeDeploy
                 .data('db-devoxx.liferay.com')
                 .where('id', id)
                 .get('players')
                 .then(function(result) {
 
-                    console.log(result);
+                    if (result.length === 0) {
 
-                    if (result.length == 0) {
-                        WeDeploy
-                            .data('db-devoxx.liferay.com')
-                            .create('players', {
-                                "name": currentUser.name,
-                                "count": 1,
-                                "games": [
-                                    {
-                                        gameDate: ((new Date()).toJSON()),
-                                        score: score,
-                                        redZombiesKilled: redZombiesKilledTotal,
-                                        greenZombiesKilled: greenZombiesKilledTotal,
-                                        fired: firedTotal,
-                                        missed: missedTotal,
-                                        level: level
-                                    }
-                                ],
-                                "id": id,
-                                "maxScore": score
-                            }
-                            ).then(function() {
-                                setTimeout(redirectToGameOverPage, 2000);
-                            })
-                            .catch(function(createError) {
-                                console.log(createError);
-                                alert('Something wrong happened, try later.');
-                            });
+                        saveUserScores();
 
                     } else {
                         var player = {};
@@ -121,31 +103,52 @@
                         }
 
                         player.games[player.games.length] = {
-                            gameDate: ((new Date()).toJSON()),
-                            score: score,
-                            redZombiesKilled: redZombiesKilledTotal,
-                            greenZombiesKilled: greenZombiesKilledTotal,
-                            fired: firedTotal,
-                            missed: missedTotal,
-                            level: level
+                            gameStats
                         };
 
-                        WeDeploy
-                            .data('db-devoxx.liferay.com')
-                            .update('players/' + id, player)
-                            .then(function() {
-                                setTimeout(redirectToGameOverPage, 2000);
-                            })
-                            .catch(function(updateError) {
-                                console.log(updateError);
-                                alert('Something wrong happened, try later.');
-                            });
-                    }
+                        updateUserScores(player);
 
+                    }
                 })
 
                 .catch(function(getError) {
                     console.log(getError);
+                    alert('Something wrong happened, try later.');
+                });
+        }
+
+        var saveUserScores = function() {
+            WeDeploy
+                .data('db-devoxx.liferay.com')
+                .create('players', {
+                    "name": currentUser.name,
+                    "count": 1,
+                    "games": [
+                        {
+                            gameStats
+                        }
+                    ],
+                    "id": id,
+                    "maxScore": score
+                }
+                ).then(function() {
+                    setTimeout(redirectToGameOverPage, 2000);
+                })
+                .catch(function(createError) {
+                    console.log(createError);
+                    alert('Something wrong happened, try later.');
+                });
+        }
+
+        var updateUserScores = function(player) {
+            WeDeploy
+                .data('db-devoxx.liferay.com')
+                .update('players/' + id, player)
+                .then(function() {
+                    setTimeout(redirectToGameOverPage, 2000);
+                })
+                .catch(function(updateError) {
+                    console.log(updateError);
                     alert('Something wrong happened, try later.');
                 });
         }
