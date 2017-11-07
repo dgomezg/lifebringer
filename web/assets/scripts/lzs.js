@@ -69,15 +69,6 @@
 
         var currentUser = config.currentUser;
         var WeDeploy = config.weDeploy;
-        var gameStats = {
-                gameDate: ((new Date()).toJSON()),
-                score: score,
-                redZombiesKilled: redZombiesKilledTotal,
-                greenZombiesKilled: greenZombiesKilledTotal,
-                fired: firedTotal,
-                missed: missedTotal,
-                level: level
-            }
         var id = window.md5(currentUser.email);
 
         var sendScoreToServer = function() {
@@ -87,9 +78,19 @@
                 .get('players')
                 .then(function(result) {
 
+                    var gameStats = {
+                        "gameDate": ((new Date()).toJSON()),
+                        "score": score,
+                        "redZombiesKilled": redZombiesKilledTotal,
+                        "greenZombiesKilled": greenZombiesKilledTotal,
+                        "fired": firedTotal,
+                        "missed": missedTotal,
+                        "level": level
+                    }
+
                     if (result.length === 0) {
 
-                        saveUserScores();
+                        saveUserScores(gameStats);
 
                     } else {
                         var player = {};
@@ -117,7 +118,7 @@
                 });
         }
 
-        var saveUserScores = function() {
+        var saveUserScores = function(newGame) {
             WeDeploy
                 .data('db-devoxx.liferay.com')
                 .create('players', {
@@ -125,7 +126,7 @@
                     "count": 1,
                     "games": [
                         {
-                            gameStats
+                            newGame
                         }
                     ],
                     "id": id,
@@ -140,10 +141,10 @@
                 });
         }
 
-        var updateUserScores = function(player) {
+        var updateUserScores = function(newGame) {
             WeDeploy
                 .data('db-devoxx.liferay.com')
-                .update('players/' + id, player)
+                .update('players/' + id, newGame)
                 .then(function() {
                     setTimeout(redirectToGameOverPage, 2000);
                 })
