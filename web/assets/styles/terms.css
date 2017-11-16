@@ -1,0 +1,23 @@
+.terms {
+	display: inline-block;
+}
+
+input[type="checkbox"] {
+	width: 14px;
+	margin-right: 6px;
+}
+
+.terms p {
+	position: relative;
+	top: 2px;
+	line-height: 0;
+}
+
+.terms a {
+	margin: 0;
+	display: inline-block;
+}
+
+.terms-embedded-link {
+	display: inline;
+}

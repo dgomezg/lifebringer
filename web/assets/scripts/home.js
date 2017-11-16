@@ -1,5 +1,5 @@
-var auth = WeDeploy.auth('https://auth-devoxx.liferay.com');
-var data = WeDeploy.data('https://db-devoxx.liferay.com');
+var auth = WeDeploy.auth('https://auth-codemotion.wedeploy.io');
+var data = WeDeploy.data('https://db-codemotion.wedeploy.io');
 
 // Check Authentication
 
@@ -48,8 +48,11 @@ function createUser(form) {
 	return auth.createUser({
 			id: window.md5(form.email.value),
 			name: form.name.value,
+			surname: form.surname.value,
 			email: form.email.value,
-			password: form.password.value
+			phone: form.phone.value,
+			password: form.password.value,
+			terms: form.terms.value
 		});
 }
 

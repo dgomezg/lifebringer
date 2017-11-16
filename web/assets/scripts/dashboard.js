@@ -1,6 +1,6 @@
 // Profile
 
-var currentUser = WeDeploy.auth('auth-devoxx.liferay.com').currentUser;
+var currentUser = WeDeploy.auth('auth-codemotion.wedeploy.io').currentUser;
 
 if (!currentUser) {
 	document.location.href = '/';
@@ -12,7 +12,7 @@ var logout = document.querySelector('.profile-logout');
 
 logout.addEventListener('click', function() {
 	WeDeploy
-		.auth('auth-devoxx.liferay.com')
+		.auth('auth-codemotion.wedeploy.io')
 		.signOut()
 		.then(function() {
 			localStorage.clear();
@@ -30,7 +30,7 @@ logout.addEventListener('click', function() {
 var table = document.querySelector('table tbody');
 
 WeDeploy
-	.data('db-devoxx.liferay.com')
+	.data('db-codemotion.wedeploy.io')
 	.orderBy('maxScore', 'desc')
 	.limit(500)
 	.get('players')

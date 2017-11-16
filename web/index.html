@@ -9,14 +9,21 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700">
 	<link rel="stylesheet" href="/assets/styles/main.css">
 	<link rel="stylesheet" href="/assets/styles/home.css">
+	<link rel="stylesheet" href="/assets/styles/terms.css">
 </head>
 <body>
 	<form class="container">
 		<img class="logo" src="/assets/sprites/logo-720.png">
-		<p class="instructions">Welcome to WeDeploy by Liferay at Devoxx! Are you ready to bring life and shoot zombies?<br><br>Beat today's highscore until 17:00 and win one of the Star Wars lego sets.</p>
-		<input name="name" type="text" placeholder="Full Name" required>
+		<p class="instructions">Welcome to CODEMOTION! Are you ready to bring life and shoot zombies?<br><br>Beat the highscore and win a Liferay price pack.</p>
+		<input name="name" type="text" placeholder="Name" required>
+		<input name="surname" type="text" placeholder="Surname" required>
 		<input name="email" type="email" placeholder="Email" required>
+		<input name="phone" type="tel" placeholder="Phone Number" required>
 		<input name="password" type="password" placeholder="Password" required>
+		<div class="terms">
+			<input name="terms" type="checkbox" value="Yes" required>
+			<p class="terms">I agree to the <a target="_blank" href="/terms/">DPL terms</a>.</p>
+		</div>
 		<button type="submit">Create Account</button>
 		<a href="/login/">Sign In</a>
 	</form>

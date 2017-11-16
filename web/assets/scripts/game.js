@@ -1,4 +1,4 @@
-var currentUser = WeDeploy.auth('auth-devoxx.liferay.com').currentUser;
+var currentUser = WeDeploy.auth('auth-codemotion.wedeploy.io').currentUser;
 
 if (currentUser) {
     runLifeBringer({

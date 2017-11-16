@@ -1,4 +1,4 @@
-var auth = WeDeploy.auth('https://auth-devoxx.liferay.com');
+var auth = WeDeploy.auth('https://auth-codemotion.wedeploy.io');
 
 // Check Authentication
 
