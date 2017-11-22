@@ -1,4 +1,4 @@
-var currentUser = WeDeploy.auth('auth-codemotion.wedeploy.io').currentUser;
+var currentUser = WeDeploy.auth('auth-codemotiongame.wedeploy.io').currentUser;
 
 if (currentUser) {
     runLifeBringer({

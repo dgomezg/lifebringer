@@ -1,5 +1,5 @@
-var auth = WeDeploy.auth('https://auth-codemotion.wedeploy.io');
-var data = WeDeploy.data('https://db-codemotion.wedeploy.io');
+var auth = WeDeploy.auth('https://auth-codemotiongame.wedeploy.io');
+var data = WeDeploy.data('https://db-codemotiongame.wedeploy.io');
 
 // Check Authentication
 

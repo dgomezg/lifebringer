@@ -1,5 +1,5 @@
-var data_endpoint = "db-devoxx.liferay.com";
-var auth_endpoint = "auth-devoxx.liferay.com";
+var data_endpoint = "db-codemotiongame.wedeploy.io";
+var auth_endpoint = "auth-codemotiongame.wedeploy.io";
 
 document.getElementById("delete-db").addEventListener("click", deleteCollection);
 document.getElementById("get-user-list").addEventListener("click", getUsers);
@@ -22,18 +22,10 @@ function deleteCollection() {
 function getUsers() {
 	WeDeploy
 	    .data(auth_endpoint)
-	    .auth('ce110a79-59f4-4a5d-b005-576fd6b846e2')
+	    .auth('1635fefd-b19f-4f7a-a25a-734270f4f252')
 	    .get('users')
 	    .then(function(users) {
-	    	// var userList = [];
-	    	// var i = 0;
-
-	    	// for (i = 0; i < users.length; ++i) {
-	    	// 	userList.push(users[i].data_);
-	    	// };
-
 	    	showUserList(users);
-
 	    })
 	    .catch(function(err) {
 	    	console.log(err)
