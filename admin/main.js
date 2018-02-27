@@ -1,5 +1,5 @@
-const project_id = "projectID";
-const master_token = "masterToken";
+const project_id = "techla";
+const master_token = "7f2eab6f-b4b7-4913-bd7b-305165fdb428";
 
 document.getElementById("delete-db").addEventListener("click", deleteCollection);
 document.getElementById("get-user-list").addEventListener("click", getUsers);

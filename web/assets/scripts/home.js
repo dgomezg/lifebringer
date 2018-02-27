@@ -51,7 +51,8 @@ function createUser(form) {
 			name: form.name.value,
 			email: form.email.value,
 			password: form.password.value,
-			terms: form.terms.value
+			github: form.github.value
+			// terms: form.terms.value
 		});
 }
 
