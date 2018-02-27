@@ -73,7 +73,7 @@
 
         var sendScoreToServer = function() {
             WeDeploy
-                .data('db-codemotiongame.wedeploy.io')
+                .data(data_endpoint)
                 .where('id', id)
                 .get('players')
                 .then(function(result) {
@@ -120,7 +120,7 @@
 
         var saveUserScores = function(newGame) {
             WeDeploy
-                .data('db-codemotiongame.wedeploy.io')
+                .data(data_endpoint)
                 .create('players', {
                     "name": currentUser.name,
                     "count": 1,
@@ -143,7 +143,7 @@
 
         var updateUserScores = function(newGame) {
             WeDeploy
-                .data('db-codemotiongame.wedeploy.io')
+                .data(data_endpoint)
                 .update('players/' + id, newGame)
                 .then(function() {
                     setTimeout(redirectToGameOverPage, 2000);

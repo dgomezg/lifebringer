@@ -1,5 +1,5 @@
-var data_endpoint = "db-codemotiongame.wedeploy.io";
-var auth_endpoint = "auth-codemotiongame.wedeploy.io";
+const project_id = "projectID";
+const master_token = "masterToken";
 
 document.getElementById("delete-db").addEventListener("click", deleteCollection);
 document.getElementById("get-user-list").addEventListener("click", getUsers);
@@ -8,7 +8,7 @@ function deleteCollection() {
 	var dbResponse = document.getElementById('db-response');
 
 	WeDeploy
-		.data(data_endpoint)
+		.data(`db-${project_id}.wedeploy.io`)
 		.delete('players')
 		.then(function(){
 			dbResponse.innerHTML = "The Database was deleted successfully.";
@@ -21,8 +21,8 @@ function deleteCollection() {
 
 function getUsers() {
 	WeDeploy
-	    .data(auth_endpoint)
-	    .auth('1635fefd-b19f-4f7a-a25a-734270f4f252')
+	    .data(`auth-${project_id}.wedeploy.io`)
+	    .auth(master_token)
 	    .get('users')
 	    .then(function(users) {
 	    	showUserList(users);

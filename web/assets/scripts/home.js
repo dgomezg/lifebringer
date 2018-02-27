@@ -1,5 +1,5 @@
-var auth = WeDeploy.auth('https://auth-codemotiongame.wedeploy.io');
-var data = WeDeploy.data('https://db-codemotiongame.wedeploy.io');
+var auth = WeDeploy.auth(auth_endpoint);
+var data = WeDeploy.data(data_endpoint);
 
 // Check Authentication
 
@@ -37,6 +37,7 @@ form.addEventListener('submit', function(e) {
 				form.reset();
 			} else {
 				alert('Something wrong happened, try later.');
+				console.log(err);
 				form.reset();
 			}
 		});
@@ -48,9 +49,7 @@ function createUser(form) {
 	return auth.createUser({
 			id: window.md5(form.email.value),
 			name: form.name.value,
-			surname: form.surname.value,
 			email: form.email.value,
-			phone: form.phone.value,
 			password: form.password.value,
 			terms: form.terms.value
 		});

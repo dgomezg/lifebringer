@@ -1,6 +1,6 @@
 // Profile
 
-var currentUser = WeDeploy.auth('auth-codemotiongame.wedeploy.io').currentUser;
+var currentUser = WeDeploy.auth(auth_endpoint).currentUser;
 
 if (!currentUser) {
 	document.location.href = '/';
@@ -12,7 +12,7 @@ var logout = document.querySelector('.profile-logout');
 
 logout.addEventListener('click', function() {
 	WeDeploy
-		.auth('auth-codemotiongame.wedeploy.io')
+		.auth(auth_endpoint)
 		.signOut()
 		.then(function() {
 			localStorage.clear();
@@ -30,7 +30,7 @@ logout.addEventListener('click', function() {
 var table = document.querySelector('table tbody');
 
 WeDeploy
-	.data('db-codemotiongame.wedeploy.io')
+	.data(data_endpoint)
 	.orderBy('maxScore', 'desc')
 	.limit(500)
 	.get('players')
