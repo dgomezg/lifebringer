@@ -5,6 +5,7 @@
 	<title>Dashboard - Lifebringer</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+	<link rel="shortcut icon" href="/assets/favicon.ico">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700">
 	<link rel="stylesheet" href="/assets/styles/main.css">
 	<link rel="stylesheet" href="/assets/styles/dashboard.css">
@@ -12,6 +13,7 @@
 <body>
 	<header class="profile">
 		<div class="container">
+			<img class="logo" src="/assets/sprites/logo-720.png">
 			<img class="profile-avatar">
 			<h1 class="profile-name">
 				Loading...
@@ -22,8 +24,9 @@
 			<p class="profile-ranking">
 				Highest Score: <span class="profile-score">?</span>
 			</p>
+			<p class="profile-message"></p>
 			<a class="profile-play" href="/game/">
-				Play again!
+				Play now!
 			</a>
 			<a class="profile-logout">
 				<img src="/assets/images/leave.svg" alt="Logout">
@@ -41,7 +44,8 @@
 	</div>
 
 	<script src="/assets/scripts/md5.min.js"></script>
-	<script src="/assets/scripts/wedeploy.js"></script>
+	<script src="https://cdn.wedeploy.com/api/4.0.2/wedeploy.js"></script>
+	<script src="/assets/scripts/globals.js"></script>
 	<script src="/assets/scripts/dashboard.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-var currentUser = WeDeploy.auth().currentUser;
+var currentUser = WeDeploy.auth(auth_endpoint).currentUser;
 
 if (currentUser) {
     runLifeBringer({

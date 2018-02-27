@@ -1,6 +1,6 @@
 // Profile
 
-var currentUser = WeDeploy.auth().currentUser;
+var currentUser = WeDeploy.auth(auth_endpoint).currentUser;
 
 if (!currentUser) {
 	document.location.href = '/';
@@ -12,9 +12,12 @@ var logout = document.querySelector('.profile-logout');
 
 logout.addEventListener('click', function() {
 	WeDeploy
-		.auth('auth-ccc.liferay.com')
+		.auth(auth_endpoint)
 		.signOut()
 		.then(function() {
+			localStorage.clear();
+			document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
 			document.location.href = '/';
 		})
 		.catch(function() {
@@ -27,7 +30,7 @@ logout.addEventListener('click', function() {
 var table = document.querySelector('table tbody');
 
 WeDeploy
-	.data('db-ccc.liferay.com')
+	.data(data_endpoint)
 	.orderBy('maxScore', 'desc')
 	.limit(500)
 	.get('players')
@@ -43,7 +46,6 @@ function createLeaderboard(players) {
 
 	for (var i = 0; i < players.length; i++) {
 		players[i].position = i + 1;
-		players[i].photoUrl = players[i].photoUrl || '/assets/images/avatar.jpg';
 		players[i].name = players[i].name || players[i].email;
 
 		if (players[i].id === window.md5(currentUser.email)) {
@@ -52,7 +54,6 @@ function createLeaderboard(players) {
 
 		html += '<tr>' +
 			'<td class="ranking-position">' + players[i].position + '</td>' +
-			'<td class="ranking-avatar"><img src="' + players[i].photoUrl +'"></td>' +
 			'<td class="ranking-name">' + players[i].name +'</td>' +
 			'<td class="ranking-score">' + players[i].maxScore +'</td>' +
 		'</tr>';
@@ -62,13 +63,18 @@ function createLeaderboard(players) {
 }
 
 function appendCurrentUser(user) {
-	var profileAvatar = document.querySelector('.profile-avatar');
 	var profileName = document.querySelector('.profile-name');
 	var profilePosition = document.querySelector('.profile-position');
 	var profileScore = document.querySelector('.profile-score');
+	var profileMessage = document.querySelector('.profile-message');
 
-	profileAvatar.setAttribute('src', user.photoUrl);
 	profileName.innerText = user.name;
 	profilePosition.innerText = user.position;
 	profileScore.innerText = user.maxScore;
+
+	if (user.position === 1) {
+		profileMessage.innerText = 'Congratulations, you beat the highscore!';
+	} else {
+		profileMessage.innerText = 'Try again to beat the highscore!';
+	}
 }

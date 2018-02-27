@@ -2,33 +2,26 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Lifebringer</title>
+	<title>Sign In - Lifebringer</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link rel="shortcut icon" href="/assets/favicon.ico">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700">
 	<link rel="stylesheet" href="/assets/styles/main.css">
 	<link rel="stylesheet" href="/assets/styles/home.css">
-	<link rel="stylesheet" href="/assets/styles/terms.css">
 </head>
 <body>
 	<form class="container">
 		<img class="logo" src="/assets/sprites/logo-720.png">
-		<p class="instructions">Welcome to EVENT! Are you ready to bring life and shoot zombies?<br><br>Beat the highscore and win a PRIZE.</p>
-		<input name="name" type="text" placeholder="Name" required>
 		<input name="email" type="email" placeholder="Email" required>
 		<input name="password" type="password" placeholder="Password" required>
-		<div class="terms">
-			<input name="terms" type="checkbox" value="Yes" required>
-			<p class="terms">I agree to the <a target="_blank" href="/terms/">terms</a>.</p>
-		</div>
-		<button type="submit">Create Account</button>
-		<a href="/login/">Sign In</a>
+		<button type="submit">Sign In</button>
+		<a href="/">Create Account</a>
 	</form>
 
 	<script src="/assets/scripts/md5.min.js"></script>
 	<script src="https://cdn.wedeploy.com/api/4.0.2/wedeploy.js"></script>
 	<script src="/assets/scripts/globals.js"></script>
-	<script src="/assets/scripts/home.js"></script>
+	<script src="/assets/scripts/login.js"></script>
 </body>
 </html>

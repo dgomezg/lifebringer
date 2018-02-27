@@ -1,3 +1,8 @@
+.logo {
+	margin: 20px 0 0;
+	width: 100%;
+}
+
 /* User Profile */
 
 .profile {
@@ -5,14 +10,6 @@
 	text-align: center;
 	width: 100%;
 	padding: 20px 0 40px;
-}
-
-.profile-avatar {
-	width: 128px;
-	height: 128px;
-	border-radius: 50%;
-	margin: 0 0 20px;
-	background: white;
 }
 
 .profile-name {
@@ -27,8 +24,13 @@
 }
 
 .profile-position,
-.profile-score {
+.profile-score,
+.profile-message {
 	color: #00d46a;
+}
+
+.profile-message {
+	margin: 20px 0;
 }
 
 .profile-play {
@@ -42,7 +44,7 @@
 	font-weight: 600;
 	line-height: 58px;
 	outline: none;
-	margin: 20px 0 0;
+	margin: 0;
 	width: 100%;
 	text-decoration: none;
 }
@@ -70,13 +72,6 @@
 .ranking-position {
 	width: 30px;
 	text-align: left;
-}
-
-.ranking-avatar img {
-	width: 48px;
-	height: 48px;
-	border-radius: 50%;
-	background: white;
 }
 
 .ranking-name {

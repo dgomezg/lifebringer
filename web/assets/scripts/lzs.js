@@ -69,48 +69,87 @@
 
         var currentUser = config.currentUser;
         var WeDeploy = config.weDeploy;
+        var id = window.md5(currentUser.email);
 
         var sendScoreToServer = function() {
-            var id = window.md5(currentUser.email);
-
             WeDeploy
-                .data('db-ccc.liferay.com')
+                .data(data_endpoint)
                 .where('id', id)
                 .get('players')
                 .then(function(result) {
-                    var player = {};
 
-                    if (result.length > 0) {
-                        player = result[0];
+                    var gameStats = {
+                        "gameDate": ((new Date()).toJSON()),
+                        "score": score,
+                        "redZombiesKilled": redZombiesKilledTotal,
+                        "greenZombiesKilled": greenZombiesKilledTotal,
+                        "fired": firedTotal,
+                        "missed": missedTotal,
+                        "level": level
                     }
 
-                    player.count++;
+                    if (result.length === 0) {
 
-                    if (score > player.maxScore) {
-                        player.maxScore = score;
+                        saveUserScores(gameStats);
+
+                    } else {
+                        var player = {};
+
+                        player = result[0]
+
+                        player.count++;
+
+                        if (score > player.maxScore) {
+                            player.maxScore = score;
+                        }
+
+                        player.games[player.games.length] = {
+                            gameStats
+                        };
+
+                        updateUserScores(player);
+
                     }
-
-                    player.games[player.games.length] = {
-                        gameDate: ((new Date()).toJSON()),
-                        score: score,
-                        redZombiesKilled: redZombiesKilledTotal,
-                        greenZombiesKilled: greenZombiesKilledTotal,
-                        fired: firedTotal,
-                        missed: missedTotal,
-                        level: level
-                    };
-
-                    WeDeploy
-                        .data('db-ccc.liferay.com')
-                        .update('players/' + id, player)
-                        .then(function() {
-                            setTimeout(redirectToGameOverPage, 2000);
-                        })
-                        .catch(function() {
-                            alert('Something wrong happened, try later.');
-                        });
                 })
-                .catch(function() {
+
+                .catch(function(getError) {
+                    console.log(getError);
+                    alert('Something wrong happened, try later.');
+                });
+        }
+
+        var saveUserScores = function(newGame) {
+            WeDeploy
+                .data(data_endpoint)
+                .create('players', {
+                    "name": currentUser.name,
+                    "count": 1,
+                    "games": [
+                        {
+                            newGame
+                        }
+                    ],
+                    "id": id,
+                    "maxScore": score
+                }
+                ).then(function() {
+                    setTimeout(redirectToGameOverPage, 2000);
+                })
+                .catch(function(createError) {
+                    console.log(createError);
+                    alert('Something wrong happened, try later.');
+                });
+        }
+
+        var updateUserScores = function(newGame) {
+            WeDeploy
+                .data(data_endpoint)
+                .update('players/' + id, newGame)
+                .then(function() {
+                    setTimeout(redirectToGameOverPage, 2000);
+                })
+                .catch(function(updateError) {
+                    console.log(updateError);
                     alert('Something wrong happened, try later.');
                 });
         }
@@ -251,22 +290,16 @@
             }, 2000);
 
             //text
-            stateText = lzs.add.text(lzs.world.centerX, lzs.world.centerY, ' ', {fill: '#E9B3F7'});
+            stateText = lzs.add.text(lzs.world.centerX, lzs.world.centerY, ' ', {font: '56px badaboom', fill: '#E9B3F7'});
             stateText.anchor.setTo(0.5, 0.5);
             stateText.visible = false;
-            stateText.font = 'badaboom';
-            stateText.fontSize  = '56';
 
-            bonusText = lzs.add.text(lzs.world.centerX, lzs.world.centerY - 100, ' ', {fill: '#E9B3F7'});
+            bonusText = lzs.add.text(lzs.world.centerX, lzs.world.centerY - 100, ' ', {font: '56px badaboom', fill: '#E9B3F7'});
             bonusText.anchor.setTo(0.5, 0.5);
             bonusText.visible = false;
-            bonusText.font = 'badaboom';
-            bonusText.fontSize  = '56';
 
             //Score
-            scoreText = lzs.add.text(20, 20, scoreString + score, {fill: '#E9B3F7' });
-            scoreText.font = 'badaboom';
-            scoreText.fontSize  = '42';
+            scoreText = lzs.add.text(20, 20, scoreString + score, {font: '42px badaboom', fill: '#E9B3F7' });
             scoreText.visible = false;
 
             if (!lzs.device.desktop){
